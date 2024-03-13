@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        input[type="button"] {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: calc(100% - 16px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="button"] {
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sales Management</h2>
+        <label for="name">Customer Name:</label>
+        <input type="text" id="name">
+        <br>
+        <label for="id">ID:</label>
+        <input type="text" id="id">
+        <br>
+        <label for="prdname">Product Name:</label>
+        <input type="text" id="prdname">
+        <br>
+        <label for="qty">Quantity:</label>
+        <input type="text" id="qty">
+        <br>
+        <label for="price">Price:</label>
+        <input type="text" id="price">
+        <br>
+
+        <input type="button" value="Save" onclick="save()">
+        <input type="button" value="Show" onclick="show()">
+        <input type="button" value="Reset" onclick="reset()">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Auto increment</th>
+                    <th>Customer Name</th>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="tbl"></tbody>
+        </table>
+    </div>
+
+    <script>
+        var arr = [];
+
+        function save() {
+            var a = {
+                name: document.getElementById('name').value,
+                id: document.getElementById('id').value,
+                prdname: document.getElementById('prdname').value,
+                qty: document.getElementById('qty').value,
+                price: document.getElementById('price').value,
+            }
+            arr.push(a);
+            reset();
+        }
+
+        function show() {
+            var html = '';
+            for (var i = 0; i < arr.length; i++) {
+                var n = i + 1;
+                html += "<tr>";
+                html += "<td>" + n + "</td>";
+                html += "<td>" + arr[i].name + "</td>";
+                html += "<td>" + arr[i].id + "</td>";
+                html += "<td>" + arr[i].prdname + "</td>";
+                html += "<td>" + arr[i].qty + "</td>";
+                html += "<td>" + arr[i].price + "</td>";
+                html += "<td>" + (parseFloat(arr[i].qty) * parseFloat(arr[i].price)).toFixed(2) + "</td>";
+                html += "</tr>";
+            }
+            document.getElementById('tbl').innerHTML = html;
+        }
+
+        function reset() {
+            document.getElementById('name').value = '';
+            document.getElementById('id').value = '';
+            document.getElementById('prdname').value = '';
+            document.getElementById('qty').value = '';
+            document.getElementById('price').value = '';
+        }
+    </script>
+</body>
+</html>
